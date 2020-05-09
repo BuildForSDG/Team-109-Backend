@@ -1,0 +1,37 @@
+From the registration portal, Youths can register, Donors can register
+    Details required for registration
+       ~ Name,  email address
+    Details required for registration
+       ~ Name, email address, 
+
+A confirmation mail and a unique ID is sent to the applicants(Youths and Donors)
+Login Page
+   ~ email
+   ~ password
+   ~ select donor, youth or Social Worker (Social Worker will login with a unique Security key as additional security)
+Dashboard
+    On the Youth's Dashboard,
+        If registration is incomplete:            
+            ~ Display Details to be provided for complete registration:
+               ~ Date of birth, Contact Address, Phone Number, State of Origin, LG, Permanent Address, 
+                 Field Specialization (Education, Agriculture, IT sales, Health, etc), Reasons for applying, Expectations in the next 5 years, 
+                Referee Details (at least 3), Bank Details(BVN)
+            ~ the supplied info will be inserted into the respective ``list of state table`` in the DB
+        else:
+            ~ Display: ~ Profile page
+                       ~ Apply for Fund
+                            ~ email notification (Failed, Successful or Pending)
+
+    On the Donors Dashboard,
+        if registration is incomplete:            
+           ~ Display Details to be provided for complete registration:
+                     ~ Contact Address, Phone Number, Reasons for Donation, Amount
+        else:
+           ~ Payment Gateway
+               ~ email notification (Failed or Successful)
+
+To be added...
+    Social Worker's Dashboard
+    Complainant's Dashboard
+
+
