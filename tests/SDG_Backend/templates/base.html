@@ -1,0 +1,82 @@
+<html lang="en">
+<head>
+    <title>{{ title }} | SDG Team 109 Project</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand topnav" href="{{ url_for('core.index') }}">SDG Team 109 Project</a>
+          </div>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right">
+                  {% if current_user.is_authenticated %}
+                    {% if current_user.username == 'admin' and current_user.email == 'admin@admin.com' %}
+                        <li><a href="{{ url_for('core.admin_dashboard') }}">Dashboard</a></li>
+                        <li><a href="{{ url_for('admins.list_statuss') }}">Status</a></li>
+                        <li><a href="{{ url_for('admins.list_projects') }}">Projects</a></li>
+                        <li><a href="{{ url_for('admins.list_sponsors') }}">Sponsors</a></li>
+                        <li><a href="{{ url_for('admins.list_youth') }}">Youth</a></li>
+                        <li><a href="{{ url_for('blog_posts.create_post')}}">Create Post</a></li>
+                    {% elif not current_user.sponsor %}
+                        <li><a href="{{ url_for('core.dashboard') }}">Dashboard</a></li>
+                        <li><a href="{{ url_for('youths.account') }}">Profile</a></li>
+                        <li><a href="{{ url_for('blog_posts.create_post')}}">Create Post</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('core.sponsors_dashboard') }}">Sponsor Dashboard</a></li>
+                        <li><a href="{{ url_for('sponsors.account') }}">Sponsor Profile</a></li>
+                        <li><a href="{{ url_for('blog_posts.create_post')}}">Create Post</a></li>
+                    {% endif %}
+                    <li><a href="{{ url_for('youths.logout') }}">Logout</a></li>
+                    <li><a><i class="fa fa-user"></i>  Hi, {{ current_user.username }}!</a></li>
+                  {% else %}
+                    <li><a href="{{ url_for('core.index') }}">Home</a></li>
+                    <li><a href="{{ url_for('core.info') }}">About Us</a></li>
+                    <li><a href="{{ url_for('youths.register') }}">Register</a></li>
+                    <li><a href="{{ url_for('youths.login') }}">Login</a></li>
+                    <li><a href="{{ url_for('sponsors.register') }}">Sponsor Register</a></li>
+                    <li><a href="{{ url_for('sponsors.login') }}">Sponsor Login</a></li>
+
+                  {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+    <div class="wrapper">
+      {% block body %}
+      {% endblock %}
+      <div class="push"></div>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-inline">
+
+                        <li><a href="{{ url_for('core.index') }}">Home</a></li>
+                        <li class="footer-menu-divider">⋅</li>
+                        {% if current_user.is_authenticated %}
+                            <li><a href="{{ url_for('youths.logout') }}">Logout</a></li>
+                        {% else %}
+                        <li><a href="{{ url_for('youths.register') }}">Register</a></li>
+                        <li class="footer-menu-divider">⋅</li>
+                        <li><a href="{{ url_for('youths.login') }}">Login</a></li>
+                        {% endif %}
+                    </ul>
+                    <p class="copyright text-muted small">Copyright © 2020. All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
