@@ -1,0 +1,30 @@
+<!-- SDG_Backend/templates/Sponsor/login.html -->
+
+{% import "bootstrap/utils.html" as utils %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block body %}
+
+  <div class="content-section">
+    <div align="center">
+      <h1>Welcome to the page for {{ current_user.username }}</h1>
+      <img align='center' src="{{ url_for('static',filename='profile_pics/'+current_user.profile_image) }}">
+      <p>{{ current_user.email }}</p>
+      <h3>Registered on: {{ current_user.date_registered.strftime('%B %d, %Y') }}</h3>
+      <h3>Last Login: {{ current_user.last_login.strftime('%B %d, %Y') }}</h3>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <br/>
+    {{ utils.flashed_messages() }}
+    <br/>
+    <div class="center">
+      <h1>Update your Profile</h1>
+      <br/>
+      {{ wtf.quick_form(form) }}
+    </div>
+  </div>
+
+{% endblock %}

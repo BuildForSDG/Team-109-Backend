@@ -1,0 +1,28 @@
+<!-- SDG_Backend/templates/Admin/Youth/youth.html -->
+
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends "base.html" %}
+{% block title %}Assign Youth{% endblock %}
+{% block body %}
+<div class="content-section">
+ <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <div class="center">
+            <h1> Assign Status, Projects and Sponsors </h1>
+            <br/>
+            <p>
+                Select a status, role and/or project to assign to
+                <span style="color: #aec251;">
+                    {{ youth.firstname }} {{ youth.lastname }}
+                </span>
+            </p>
+            <br/>
+            {{ wtf.quick_form(form) }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}
