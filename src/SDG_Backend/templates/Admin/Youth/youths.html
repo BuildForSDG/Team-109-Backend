@@ -1,0 +1,78 @@
+<!-- SDG_Backend/templates/Admin/Youth/youths.html -->
+
+{% import "bootstrap/utils.html" as utils %}
+{% extends "base.html" %}
+{% block title %}Youth{% endblock %}
+{% block body %}
+<div class="content-section">
+  <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <br/>
+        {{ utils.flashed_messages() }}
+        <br/>
+        <h1 style="text-align:center;">Youths</h1>
+        {% if youths %}
+          <hr class="intro-divider">
+          <div class="center">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th width="40%"> Name </th>
+                  <th width="30%"> Status </th>
+                  <th width="30%"> Project </th>
+                  <th width="30%"> Sponsor </th>
+                  <th width="20%"> Assign </th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for youth in youths %}
+                {% if youth.username == "admin" %}
+                    <tr style="background-color: #aec251; color: white;">
+                        <td> <i class="fa fa-key"></i> Admin </td>
+                        <td> N/A </td>
+                        <td> N/A </td>
+                        <td> N/A </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td> {{ youth.firstname }} {{ youth.lastname }} </td>
+                        <td>
+                          {% if youth.status %}
+                            {{ youth.status.name }}
+                          {% else %}
+                             -
+                          {% endif %}
+                        </td>
+                        <td>
+                          {% if youth.project %}
+                            {{ youth.project.name }}
+                          {% else %}
+                            -
+                          {% endif %}
+                        </td>
+                        <td>
+                          {% if youth.sponsor %}
+                            {{ youth.sponsor.username }}
+                          {% else %}
+                            -
+                          {% endif %}
+                        </td>
+                        <td>
+                          <a href="{{ url_for('admins.assign_youth', id=youth.id) }}">
+                            <i class="fa fa-user-plus"></i> Assign
+                          </a>
+                        </td>
+                    </tr>
+                {% endif %}
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

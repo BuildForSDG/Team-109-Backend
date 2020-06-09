@@ -1,0 +1,71 @@
+<!-- SDG_Backend/templates/Admin/Status/statuss.html -->
+
+{% import "bootstrap/utils.html" as utils %}
+{% extends "base.html" %}
+{% block title %}Status{% endblock %}
+{% block body %}
+<div class="content-section">
+  <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <br/>
+        {{ utils.flashed_messages() }}
+        <br/>
+        <h1 style="text-align:center;">Status</h1>
+        {% if statuss %}
+          <hr class="intro-divider">
+          <div class="center">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th width="40%"> Name </th>
+                  <th width="40%"> Description </th>
+                  <th width="15%"> Youth Count </th>
+                  <th width="15%"> Edit </th>
+                  <th width="15%"> Delete </th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for status in statuss %}
+                <tr>
+                  <td> {{ status.name }} </td>
+                  <td> {{ status.description }} </td>
+                  <td>
+                    {% if status.youth %}
+                      {{ status.youth.count() }}
+                    {% else %}
+                      0
+                    {% endif %}
+                  </td>
+                  <td>
+                    <a href="{{ url_for('admins.edit_status', id=status.id) }}">
+                      <i class="fa fa-pencil"></i> Edit
+                    </a>
+                  </td>
+                  <td>
+                    <a href="{{ url_for('admins.delete_status', id=status.id) }}">
+                      <i class="fa fa-trash"></i> Delete
+                    </a>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div style="text-align: center">
+        {% else %}
+          <div style="text-align: center">
+            <h3> No Status have been added. </h3>
+            <hr class="intro-divider">
+        {% endif %}
+          <a href="{{ url_for('admins.add_status') }}" class="btn btn-default btn-lg">
+            <i class="fa fa-plus"></i>
+            Add status
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}
