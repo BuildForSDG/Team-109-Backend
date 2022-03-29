@@ -69,7 +69,7 @@ oauth2==1.9.0.post1
 oauthlib==2.0.7
 odo==0.5.0
 olefile==0.45.1
-paramiko==2.6.0
+paramiko==2.10.1
 parso==0.2.0
 partd==0.3.8
 passlib==1.7.2
